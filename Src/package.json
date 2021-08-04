@@ -1,0 +1,34 @@
+{
+  "name": "galvanize_currencyexchange_services",
+  "version": "1.0.0",
+  "description": "Through this API you can convert the currency using external service.",
+  "main": "server.js",
+  "scripts": {
+    "lint": "eslint .",
+    "start": "node server.js",
+    "start:dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GanpatKalal/currencyExchangeService.git"
+  },
+  "author": "Ganpat Kalal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GanpatKalal/currencyExchangeService/issues"
+  },
+  "homepage": "https://github.com/GanpatKalal/currencyExchangeService#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.4"
+  }
+}
