@@ -5,16 +5,17 @@ name: Build and deploy Node.js app to Azure Web App - galvanizecurrencyexchanges
 
 on:
   push:
-    paths:
-    - 'Src/**'
     branches:
       - dev
   workflow_dispatch:
 
+defaults:
+  run:
+    working-directory: ./Src
+    
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
 
@@ -22,7 +23,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: '14.x'
-
+    
     - name: npm install, build, and test
       run: |
         npm install
