@@ -1,7 +1,7 @@
-const express = require('express');
+const http = require('http');
+const debug = require('debug')('webapp:server');
 
-const app = express();
-
+const app = require('../app');
 /**
  * Normalize a port into a number, string, or false.
  */
@@ -21,13 +21,11 @@ function normalizePort(val) {
   return false;
 }
 
-const port = normalizePort(process.env.PORT || '9030');
-app.set('port', port);
+const port = normalizePort(process.env.PORT || '3000');
 
 /**
  * Event listener for HTTP server "error" event.
  */
-
 function onError(error) {
   if (error.syscall !== 'listen') {
     throw error;
@@ -53,26 +51,28 @@ function onError(error) {
 /**
  * Event listener for HTTP server "listening" event.
  */
+app.set('port', port);
+
+/**
+  * Create HTTP server.
+  */
+const server = http.createServer(app);
 
 function onListening() {
-  const addr = app.address();
+  const addr = server.address();
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
+  debug(`Listening on ${bind}`);
   console.log(`Listening on ${bind}`);
 }
 
 const runningMessage = `Galvanize Currency Convert Service V1 Running on port ${port}`;
 
-// setup the Express middlware
-require('./middleware/middleware')(app);
-
-// setup the api
-require('./api/api.routes')(app);
-
-const server = app.listen(port, () => {
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+server.listen(port, () => {
   console.log(runningMessage);
 });
 
-app.on('error', onError);
-app.on('listening', onListening);
-
-module.exports = server;
+server.on('error', onError);
+server.on('listening', onListening);
