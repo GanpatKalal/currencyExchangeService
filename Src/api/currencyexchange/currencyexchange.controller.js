@@ -4,9 +4,9 @@ const fsPromises = require('fs').promises;
 
 const datafile = '././data/currencyTypes.json';
 
-// eslint-disable-next-line camelcase
-const access_key = 'ee9e6ea42766deaefe5bb34abb202d08';
 function currencyexchangeController() {
+  // eslint-disable-next-line camelcase
+  const access_key = 'ee9e6ea42766deaefe5bb34abb202d08';
   async function getCurrencyType() {
     const rawData = await fsPromises.readFile(datafile, 'utf8');
     const currencyTypes = JSON.parse(rawData);
