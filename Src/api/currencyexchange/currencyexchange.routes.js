@@ -28,7 +28,7 @@ router.get('/getSupportedCurrentTypes', controller.getSupportedCurrentTypes);
  *         application/json:
  *           schema:
  *             type: object
- *             example: {currencyValue: 111,convertFrom: 'USD', convertTo: 'EUR',}
+ *             example: {currencyValue: 111,convertFrom: 'USD', convertTo: 'EUR'}
  *     responses:
  *       200:
  *         description: Convert the currency value

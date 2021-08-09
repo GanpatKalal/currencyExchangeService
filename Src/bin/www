@@ -21,7 +21,7 @@ function normalizePort(val) {
   return false;
 }
 
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '9020');
 
 /**
  * Event listener for HTTP server "error" event.
@@ -65,7 +65,7 @@ function onListening() {
   console.log(`Listening on ${bind}`);
 }
 
-const runningMessage = `Galvanize Currency Convert Service V1 Running on port ${port}`;
+const runningMessage = `Galvanize Currency Convert Service V1 Running on portnumber: ${port}`;
 
 /**
  * Listen on provided port, on all network interfaces.

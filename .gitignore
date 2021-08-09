@@ -116,3 +116,7 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+.dockerignore
+Dockerfile
+.vscode/launch.json
+.vscode/tasks.json
