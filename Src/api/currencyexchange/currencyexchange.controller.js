@@ -17,15 +17,11 @@ function currencyexchangeController(datafile = '././data/currencyTypes.json') {
   async function getSupportedCurrentTypes(req, res) {
     try {
       const data = await getCurrencyType();
-      if (!data) {
-        res.status(404);
-        return res.send('data is empty');
-      }
       res.status(200);
       return res.send(data);
     } catch (error) {
       res.status(500);
-      return res.send('Internal server error');
+      return res.send(error);
     }
   }
 
@@ -52,17 +48,21 @@ function currencyexchangeController(datafile = '././data/currencyTypes.json') {
     // eslint-disable-next-line camelcase
     const destinationUrl = `http://apilayer.net/api/live?access_key=${access_key}&currencies=${convertTo}&source=${convertFrom}&format=${currencyValue}`;
     console.log(destinationUrl);
-    const response = await axios.get(destinationUrl);
-    const { success } = response.data;
-    const { quotes } = response.data;
-    if (success) {
-      const [first] = Object.values(quotes);
-      res.status(200);
-      return res.send(JSON.stringify(first));
+    try {
+      const response = await axios.get(destinationUrl);
+      const { success } = response.data;
+      const { quotes } = response.data;
+      if (success) {
+        const [first] = Object.values(quotes);
+        res.status(200);
+        return res.send(JSON.stringify(first));
+      }
+    } catch (error) {
+      res.status(500);
+      return res.send(error);
     }
-    res.status(404);
-    return res.send(`Unable to convert currency from: ${convertFrom}  to: ${convertTo}.`);
   }
+
   return { getCurrencyType, getSupportedCurrentTypes, getCurrencyConvertValue };
 }
 
