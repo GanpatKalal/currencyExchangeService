@@ -30,20 +30,20 @@ function currencyexchangeController(datafile = '././data/currencyTypes.json') {
     const model = req.body;
     if (!model) {
       res.status(400);
-      res.send('req.body is empty or null');
+      return res.send('req.body is empty or null');
     }
     const { currencyValue, convertFrom, convertTo } = model;
     if (!currencyValue) {
       res.status(400);
-      res.send('currencyValue is empty or null');
+      return res.send('currencyValue is empty or null');
     }
     if (!convertFrom) {
       res.status(400);
-      res.send('convertFrom is empty or null');
+      return res.send('convertFrom is empty or null');
     }
     if (!convertTo) {
       res.status(400);
-      res.send('convertTo is empty or null');
+      return res.send('convertTo is empty or null');
     }
     // eslint-disable-next-line camelcase
     const destinationUrl = `http://apilayer.net/api/live?access_key=${access_key}&currencies=${convertTo}&source=${convertFrom}&format=${currencyValue}`;
@@ -57,6 +57,8 @@ function currencyexchangeController(datafile = '././data/currencyTypes.json') {
         res.status(200);
         return res.send(JSON.stringify(first));
       }
+      res.status(404);
+      return res.send(`Unable to convert currency from: ${convertFrom}  to: ${convertTo}.`);
     } catch (error) {
       res.status(500);
       return res.send(error);
